@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Whymedia.id</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 20px;
+      background: #f8f9fa;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white; /* ubah jadi putih */
+      padding: 10px 20px;
+      color: black; /* tulisan jadi hitam */
+      border-radius: 0 0 5px 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 50px;
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .why {
+      color: #ff3333;
+    }
+
+    .media {
+      color: #004080;
+    }
+
+    nav {
+      padding: 10px 0;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a,
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: #004080;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 8px 12px;
+      display: inline-block;
+    }
+
+    .menu-item.active > a,
+    .menu-item.active > .dropdown-btn {
+      color: #ff3333;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      min-width: 150px;
+      z-index: 1000;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #eee;
+    }
+
+    .dropdown-content.show {
+      display: block;
+    }
+
+    .search-section {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      gap: 10px;
+    }
+
+    .search-section input {
+      padding: 8px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .search-section button {
+      padding: 8px 16px;
+      background-color: #ff3333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .sidebar {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #004080;
+      font-weight: 600;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .news-list {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .news-card {
+      display: flex;
+      background: white;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .news-card img {
+      width: 200px;
+      object-fit: cover;
+    }
+
+    .news-info {
+      padding: 15px;
+    }
+
+    .news-info h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+      color: #004080;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      padding: 30px 0;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .news-card {
+        flex-direction: column;
+      }
+
+      .news-card img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo whymedia.png" alt="Whymedia Logo" />
+      <h1><span class="why">Why</span><span class="media">Media</span></h1>
+    </div>
+    <div>Stay Informed and Stay Ahead</div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li class="menu-item">
+        <button class="dropdown-btn" aria-haspopup="true" aria-expanded="false">News ▼</button>
+        <ul class="dropdown-content">
+          <li><a href="#">Nasional</a></li>
+          <li><a href="#">Global</a></li>
+          <li><a href="#">Ekonomi</a></li>
+          <li><a href="#">Teknologi</a></li>
+        </ul>
+      </li>
+      <li class="menu-item"><a href="#">Sports</a></li>
+      <li class="menu-item"><a href="#">Entertainment</a></li>
+    </ul>
+  </nav>
+
+  <div class="search-section">
+    <input type="text" placeholder="Cari berita..." />
+    <button>Cari</button>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Kategori</h3>
+      <ul>
+        <li><a href="#">Politik</a></li>
+        <li><a href="#">Bisnis</a></li>
+        <li><a href="#">Gaya Hidup</a></li>
+        <li><a href="#">Teknologi</a></li>
+        <li><a href="#">Olahraga</a></li>
+        <li><a href="#">Kesehatan</a></li>
+        <li><a href="#">Edukasi</a></li>
+      </ul>
+    </aside>
+
+    <main class="news-list">
+      <div class="news-card">
+        <img src="gambar1.jpg" alt="Berita 1" />
+        <div class="news-info">
+          <h2>Judul Berita 1</h2>
+          <p>Isi singkat berita pertama yang menarik perhatian pembaca...</p>
+        </div>
+      </div>
+
+      <div class="news-card">
+        <img src="gambar2.jpg" alt="Berita 2" />
+        <div class="news-info">
+          <h2>Judul Berita 2</h2>
+          <p>Isi singkat berita kedua yang mengundang rasa ingin tahu pembaca...</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    &copy; 2025 Whymedia.id. Semua hak dilindungi.
+  </footer>
+
+  <script>
+    const dropdownButtons = document.querySelectorAll('.dropdown-btn');
+
+    dropdownButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = button.nextElementSibling;
+
+        document.querySelectorAll('.dropdown-content').forEach(menu => {
+          if (menu !== dropdown) {
+            menu.classList.remove('show');
+            menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        dropdown.classList.toggle('show');
+        button.setAttribute('aria-expanded', dropdown.classList.contains('show'));
+      });
+
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    window.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-content').forEach(menu => {
+        menu.classList.remove('show');
+        menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
+<a href="artikel1.html"><img src="gambar1.jpg" alt="Berita 1" /></a>

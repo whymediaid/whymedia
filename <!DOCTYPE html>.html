@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu Dropdown ala Kompas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    nav {
+      background-color: #004080;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+
+    .menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 20px;
+    }
+
+    .menu-item {
+      position: relative;
+    }
+
+    .menu-item > a,
+    .dropdown-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 16px;
+      padding: 8px 12px;
+    }
+
+    .dropdown-btn:focus {
+      outline: none;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid #ddd;
+      list-style: none;
+      padding: 0;
+      margin: 5px 0 0 0;
+      min-width: 160px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border-radius: 3px;
+      z-index: 1000;
+    }
+
+    .dropdown-content li a {
+      display: block;
+      padding: 10px 15px;
+      color: #333;
+      text-decoration: none;
+      font-weight: normal;
+    }
+
+    .dropdown-content li a:hover {
+      background-color: #f0f0f0;
+    }
+
+    /* Responsive: menu jadi kolom saat layar kecil */
+    @media (max-width: 600px) {
+      .menu {
+        flex-direction: column;
+      }
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        border: none;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul class="menu">
+    <li class="menu-item">
+      <button class="dropdown-btn">News ▼</button>
+      <ul class="dropdown-content">
+        <li><a href="#">Nasional</a></li>
+        <li><a href="#">Global</a></li>
+        <li><a href="#">Ekonomi</a></li>
+        <li><a href="#">Teknologi</a></li>
+      </ul>
+    </li>
+    <li class="menu-item"><a href="#">Sports</a></li>
+    <li class="menu-item"><a href="#">Entertainment</a></li>
+  </ul>
+</nav>
+
+<script>
+  document.querySelectorAll('.dropdown-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation(); // supaya klik tidak menjalar ke window
+
+      const dropdown = button.nextElementSibling;
+
+      // Tutup dropdown lain
+      document.querySelectorAll('.dropdown-content').forEach(menu => {
+        if(menu !== dropdown) {
+          menu.style.display = 'none';
+        }
+      });
+
+      // Toggle dropdown
+      if (dropdown.style.display === 'block') {
+        dropdown.style.display = 'none';
+      } else {
+        dropdown.style.display = 'block';
+      }
+    });
+  });
+
+  // Klik di luar dropdown untuk tutup semua dropdown
+  window.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-content').forEach(menu => {
+      menu.style.display = 'none';
+    });
+  });
+</script>
+
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Whymedia.id</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0 20px;
+      background: #f8f9fa;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: white;
+      padding: 10px 20px;
+      color: black;
+      border-radius: 0 0 5px 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 50px;
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    .why {
+      color: #ff3333;
+    }
+
+    .media {
+      color: #004080;
+    }
+
+    nav {
+      padding: 10px 0;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .menu li {
+      position: relative;
+    }
+
+    .menu a,
+    .dropdown-btn {
+      background: none;
+      border: none;
+      color: #004080;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 8px 12px;
+    }
+
+    .menu-item.active > a,
+    .menu-item.active > .dropdown-btn {
+      color: #ff3333;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background: white;
+      border: 1px solid #ccc;
+      min-width: 150px;
+      z-index: 1000;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #eee;
+    }
+
+    .dropdown-content.show {
+      display: block;
+    }
+
+    .search-section {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+      gap: 10px;
+    }
+
+    .search-section input {
+      padding: 8px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .search-section button {
+      padding: 8px 16px;
+      background-color: #ff3333;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .sidebar {
+      flex: 1;
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    }
+
+    .sidebar h3 {
+      margin-top: 0;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: #004080;
+      cursor: pointer;
+    }
+
+    .news-list {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .news-card {
+      display: flex;
+      background: white;
+      border-radius: 5px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .news-card img {
+      width: 200px;
+      object-fit: cover;
+    }
+
+    .news-info {
+      padding: 15px;
+    }
+
+    .news-info h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      padding: 30px 0;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .news-card {
+        flex-direction: column;
+      }
+
+      .news-card img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo whymedia.png" alt="Whymedia Logo" />
+      <h1><span class="why">Why</span><span class="media">Media</span></h1>
+    </div>
+    <div>Stay Informed and Stay Ahead</div>
+  </header>
+
+  <nav>
+    <ul class="menu">
+      <li class="menu-item">
+        <button class="dropdown-btn" aria-haspopup="true" aria-expanded="false">News ▼</button>
+        <ul class="dropdown-content">
+          <li><a href="#" data-category="Nasional">Nasional</a></li>
+          <li><a href="#" data-category="Global">Global</a></li>
+          <li><a href="#" data-category="Ekonomi">Ekonomi</a></li>
+          <li><a href="#" data-category="Teknologi">Teknologi</a></li>
+        </ul>
+      </li>
+      <li class="menu-item"><a href="#" data-category="Sports">Sports</a></li>
+      <li class="menu-item"><a href="#" data-category="Entertainment">Entertainment</a></li>
+    </ul>
+  </nav>
+
+  <div class="search-section">
+    <input type="text" id="searchInput" placeholder="Cari berita..." />
+    <button id="searchBtn">Cari</button>
+  </div>
+
+  <div class="container">
+    <aside class="sidebar">
+      <h3>Kategori</h3>
+      <ul>
+        <li><a href="#" data-category="Politik">Politik</a></li>
+        <li><a href="#" data-category="Bisnis">Bisnis</a></li>
+        <li><a href="#" data-category="Gaya Hidup">Gaya Hidup</a></li>
+      </ul>
+    </aside>
+
+    <main class="news-list" id="newsList">
+      <div class="news-card" data-category="Nasional">
+        <img src="gambar1.jpg" alt="Berita 1" />
+        <div class="news-info">
+          <h2>Judul Berita Nasional 1</h2>
+          <p>Isi singkat berita nasional pertama yang menarik perhatian pembaca...</p>
+        </div>
+      </div>
+
+      <div class="news-card" data-category="Sports">
+        <img src="gambar2.jpg" alt="Berita 2" />
+        <div class="news-info">
+          <h2>Judul Berita Sports 1</h2>
+          <p>Isi singkat berita sports yang mengundang rasa ingin tahu pembaca...</p>
+        </div>
+      </div>
+
+      <div class="news-card" data-category="Teknologi">
+        <img src="gambar3.jpg" alt="Berita 3" />
+        <div class="news-info">
+          <h2>Judul Berita Teknologi 1</h2>
+          <p>Isi singkat berita teknologi terbaru dan canggih...</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    &copy; 2025 Whymedia.id. Semua hak dilindungi.
+  </footer>
+
+  <script>
+    // Dropdown toggle
+    const dropdownButtons = document.querySelectorAll('.dropdown-btn');
+
+    dropdownButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dropdown = button.nextElementSibling;
+
+        document.querySelectorAll('.dropdown-content').forEach(menu => {
+          if (menu !== dropdown) {
+            menu.classList.remove('show');
+            menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        dropdown.classList.toggle('show');
+        button.setAttribute('aria-expanded', dropdown.classList.contains('show'));
+      });
+
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+    });
+
+    window.addEventListener('click', () => {
+      document.querySelectorAll('.dropdown-content').forEach(menu => {
+        menu.classList.remove('show');
+        menu.previousElementSibling.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Filter berita berdasarkan kategori
+    function filterNewsByCategory(category) {
+      const newsCards = document.querySelectorAll('.news-card');
+      if (category === 'all') {
+        newsCards.forEach(card => card.style.display = 'flex');
+        return;
+      }
+      newsCards.forEach(card => {
+        if (card.dataset.category === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Event untuk klik link kategori di sidebar dan menu nav
+    document.querySelectorAll('[data-category]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const cat = e.target.getAttribute('data-category');
+        filterNewsByCategory(cat);
+      });
+    });
+
+    // Pencarian berita sederhana
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      const keyword = document.getElementById('searchInput').value.toLowerCase();
+      const newsCards = document.querySelectorAll('.news-card');
+
+      newsCards.forEach(card => {
+        const title = card.querySelector('h2').textContent.toLowerCase();
+        const content = card.querySelector('p').textContent.toLowerCase();
+        if (title.includes(keyword) || content.includes(keyword)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

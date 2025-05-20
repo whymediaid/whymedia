@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Berita Politik - Whymedia.id</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .news-card { border: 1px solid #ccc; padding: 10px; margin-bottom: 15px; border-radius: 5px; }
+    .news-card img { width: 150px; float: left; margin-right: 15px; }
+    .news-info h2 { margin: 0; }
+    .clear { clear: both; }
+  </style>
+</head>
+<body>
+  <h1>Berita Politik</h1>
+  <div id="daftar-berita"></div>
+
+  <script src="data-berita.js"></script>
+  <script>
+    const container = document.getElementById('daftar-berita');
+    const kategoriFilter = "politik";
+
+    // Filter berita berdasarkan kategori
+    const filteredBerita = berita.filter(item => item.kategori === kategoriFilter);
+
+    // Tampilkan berita yang sudah difilter
+    filteredBerita.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'news-card';
+
+      card.innerHTML = `
+        <a href="${item.link}"><img src="${item.gambar}" alt="${item.judul}" /></a>
+        <div class="news-info">
+          <h2><a href="${item.link}">${item.judul}</a></h2>
+          <p>${item.isi}</p>
+        </div>
+        <div class="clear"></div>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
